@@ -1,4 +1,3 @@
-from cgi import test
 from time import sleep
 from selenium import webdriver
 
