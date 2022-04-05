@@ -1,4 +1,3 @@
-from cgi import test
 from time import sleep
 from selenium import webdriver
 
@@ -22,8 +21,8 @@ class InstaBot:
         username_input = self.browser.find_element(by="css selector", value="input[name='username']")
         password_input = self.browser.find_element(by="css selector", value="input[name='password']")
 
-        username_input.send_keys("")
-        password_input.send_keys("")
+        username_input.send_keys("<YOUR USERNAME>")
+        password_input.send_keys("<YOUR PASSWORD>")
 
         login_button = self.browser.find_element(by="xpath", value="//button[@type='submit']")
         login_button.click()
@@ -47,7 +46,7 @@ class InstaBot:
 
         sleep(5)
 
-        dbdChat_button = self.browser.find_element(by="xpath", value="/html/body/div[1]/section/div/div[2]/div/div/div[1]/div[2]/div/div/div/div/div[2]/a")
+        dbdChat_button = self.browser.find_element(by="xpath", value="/html/body/div[1]/section/div/div[2]/div/div/div[1]/div[2]/div/div/div/div/div[3]")
         dbdChat_button.click()
 
         sleep(5)
@@ -56,7 +55,20 @@ class InstaBot:
 
         self.browser.close()
 
+    def send_message(self, message):
+        message_input = self.browser.find_element(by="css selector", value="div.ItkAi:nth-child(2) > textarea:nth-child(1)")
+        message_input.send_keys(message)
+
+        send_button = self.browser.find_element(by="xpath", value="/html/body/div[1]/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/div[3]/button")
+        send_button.click()
+
+        sleep(5)
+
+# This was for testing purposes to check the functions work properly
 if __name__ == "__main__":
     testBot = InstaBot()
     testBot.login()
     testBot.open_messages()
+    testBot.send_message("hello from a bot")
+    testBot.close_browser()
+    
